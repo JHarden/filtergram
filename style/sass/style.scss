@@ -1,0 +1,101 @@
+
+html{
+    font-family: 'Open Sans', sans-serif;
+}
+/*mini grid*/
+.grid-100{
+    width: 100%;
+}
+.grid-50{
+    width: 50%;
+    float: left;
+}
+
+header,.header{
+    background-color: #fff;
+    text-align: center;
+    margin-top: 2rem;
+    height: auto;
+    text-transform: uppercase;
+}
+section{
+    clear:none;
+}
+body{
+    background-color: #fff;
+}
+
+div.capture{
+     padding: 2rem;
+     text-align: center;
+}
+div.capture input{
+    font-size: 1rem;
+}
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
+}
+.custom-file-input::before {
+    content: 'Upload';
+    display: inline-block;
+    transition: background-color,0.35s,ease-in;
+    background-color: #0092db;
+    padding: 10px 15px;
+    color: #fff;
+    outline: none;
+    white-space: nowrap;
+    -webkit-user-select: none;
+    cursor: pointer;
+}
+
+.custom-file-input:active::before {
+    background-color: #00a3f4;
+}
+.custom-file-input:hover::before {
+    transition: background-color,0.35s,ease-in;
+    background-color: #00a3f4;
+}
+
+div.content .canvas-wrap{
+    border: 2px dashed #dfdfdf;
+    display: inline-block;
+}
+div.content .canvas-wrap canvas{
+    padding: 2rem;
+}
+
+/*filters*/
+input[type="range"]{
+    width: 40%;
+    margin: 2rem;
+}
+.filter label{
+    color: #333;
+    display: block;
+    text-transform: uppercase;
+}
+.filter-wrap {
+    text-align: center;
+    margin-top: 5rem;
+    position: relative;
+}
+
+.download {
+    margin-top: 2rem;
+    transition: background-color,0.35s,ease-in;
+    background-color: #0092db;
+    width: 155px;
+    padding: 1rem;
+    font-size: 1rem;
+    a{
+        color: #fff;
+    }
+    &:hover{
+        cursor:pointer;
+        transition: background-color,0.35s,ease-in;
+        background-color: #00a3f4;
+        a{
+            color: #fff;
+        }
+    }
+}
