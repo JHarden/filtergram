@@ -22,28 +22,31 @@
             <div class="filter-wrap">
                 <div class="filter">
                     <label for="brightness">Brightness</label>
-                    <input type="range" id="brightness">
+                    <input type="range" id="brightness" min="1" max="100">
                 </div>
                 <div class="filter">
                     <label for="colour">Colour</label>
-                    <input type="range" id="colour">
+                    <input type="range" id="colour" min="1" max="100">
                 </div>
                 <div class="filter">
                     <label for="saturation">Saturation</label>
-                    <input type="range" id="saturation">
+                    <input type="range" id="saturation" min="1" max="100">
                 </div>
                 <div class="filter">
-                    <label for="greyscale">Greyscale</label>
-                    <input type="range" id="greyscale">
+                    <label for="redify">Redify</label>
+                    <input type="range" id="redify" min="1" max="255" value="1" onchange="colourOverlay(this.value)">
 
 
                 </div>
                 <div class="filter">
-                    <div class="grid-50">
+                    <div class="grid-25">
                     <button id="invertbtn">invert</button>
                     </div>
-                    <div class="grid-50">
+                    <div class="grid-25">
                         <button id="grayscalebtn">grayscale</button>
+                    </div>
+                    <div class="grid-25">
+                        <button id="resetbtn">reset</button>
                     </div>
 
                 </div>
@@ -58,10 +61,10 @@
             <div class="download">
                 <a id="download" download="CanvasDemo.png">Download as image</a>
             </div>
+
         </div>
     </section>
 
     <script src="script.js"></script>
-
 </body>
 </html>

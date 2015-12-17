@@ -9,6 +9,10 @@ html {
   width: 50%;
   float: left; }
 
+.grid-25 {
+  width: 25%;
+  float: left; }
+
 header, .header {
   background-color: #fff;
   text-align: center;

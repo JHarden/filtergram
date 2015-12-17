@@ -1,12 +1,18 @@
 
-Window.onload = function(event){
+var imageLoader;
+var canvas;
+var ctx;
+var data;
+var imageData;
+var originalImageData;
+
+window.onload = function(event){
 
     console.log('loading..');
-    var imageLoader = document.getElementById('img_capture');
+    imageLoader = document.getElementById('img_capture');
     imageLoader.addEventListener('change', handleImage, false);
-    var canvas = document.getElementById('img_canvas');
-    var ctx = canvas.getContext('2d');
-
+    canvas = document.getElementById('img_canvas');
+    ctx = canvas.getContext('2d');
 
     function handleImage(e){
         var reader = new FileReader();
@@ -17,11 +23,16 @@ Window.onload = function(event){
                 canvas.height = img.height;
                 ctx.drawImage(img,0,0);
                 img.style.display = 'none';
-                var imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
-                var data = imageData.data;
+                imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
+                originalImageData = ctx.getImageData(0,0,canvas.width, canvas.height);
+                data = imageData.data;
 
 
                 var invert = function() {
+
+                    imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
+                    data = imageData.data;
+
                     for (var i = 0; i < data.length; i += 4) {
                         data[i]     = 255 - data[i];     // red
                         data[i + 1] = 255 - data[i + 1]; // green
@@ -31,21 +42,24 @@ Window.onload = function(event){
                 };
 
                 var grayscale = function() {
+
+                    imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
+                    data = imageData.data;
+
                     for (var i = 0; i < data.length; i += 4) {
                         var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
                         data[i] = avg; // red
                         data[i + 1] = avg; // green
-                        data[i + 2] = avg; // blue        }
-                        ctx.putImageData(imageData, 0, 0);
+                        data[i + 2] = avg; // blue
+
                     }
+                    ctx.putImageData(imageData, 0, 0);
                 };
 
-                var colourOverlay = function(){
-
-                    for (var i = 0; i < data.length; i += 4) {
-
-
-                    }
+                var resetImageData = function(){
+                    imageData = originalImageData;
+                    ctx.putImageData(imageData, 0, 0);
+                    document.getElementById('redify').value = 1;
                 };
 
                 var invertbtn = document.getElementById('invertbtn');
@@ -54,11 +68,15 @@ Window.onload = function(event){
                 var grayscalebtn = document.getElementById('grayscalebtn');
                 grayscalebtn.addEventListener('click', grayscale);
 
+                var resetbtn = document.getElementById('resetbtn');
+                resetbtn.addEventListener('click', resetImageData);
+
             }
             img.src = event.target.result;
         }
         reader.readAsDataURL(e.target.files[0]);
     }
+
 
     function download() {
         var dt = canvas.toDataURL();
@@ -66,6 +84,24 @@ Window.onload = function(event){
     }
     document.getElementById('download').addEventListener('click', download, false);
 
-}();
+};
+
+//using the drag tool
+function colourOverlay(val){
+
+    imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
+    data = imageData.data;
+
+    console.log('val: ' + val);
+    for (var i = 0,len = data.length; i < len; i += 4) {
+
+        data[i] = val;
+        //data[i + 1] = data[i + 1] -val;
+        //data[i + 2] = data[i + 2] -val;
+    }
+    ctx.putImageData(imageData, 0, 0);
+    console.log('end loop');
+
+};
 
 
