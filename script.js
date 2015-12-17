@@ -62,6 +62,7 @@ window.onload = function(event){
                     document.getElementById('greenify').value = 0;
                     document.getElementById('blueify').value = 0;
                     document.getElementById('brightness').value = 1;
+                    document.getElementById('alpha').value = 1;
                 };
 
                 var invertbtn = document.getElementById('invertbtn');
@@ -73,6 +74,8 @@ window.onload = function(event){
                 var resetbtn = document.getElementById('resetbtn');
                 resetbtn.addEventListener('click', resetImageData);
 
+                //run reset on image load
+                resetImageData();
             }
             img.src = event.target.result;
         }
@@ -103,6 +106,8 @@ function colourOverlay(rgb , val){
                 data[i+1] = val; break;
             case 'B':
                 data[i+2] = val; break;
+            case 'A':
+                data[i+3] = val; break;
         }
     }
     ctx.putImageData(imageData, 0, 0);
