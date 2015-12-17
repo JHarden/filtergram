@@ -27,7 +27,6 @@ window.onload = function(event){
                 originalImageData = ctx.getImageData(0,0,canvas.width, canvas.height);
                 data = imageData.data;
 
-
                 var invert = function() {
 
                     imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
@@ -60,6 +59,8 @@ window.onload = function(event){
                     imageData = originalImageData;
                     ctx.putImageData(imageData, 0, 0);
                     document.getElementById('redify').value = 1;
+                    document.getElementById('greenify').value = 1;
+                    document.getElementById('blueify').value = 1;
                 };
 
                 var invertbtn = document.getElementById('invertbtn');
@@ -87,21 +88,23 @@ window.onload = function(event){
 };
 
 //using the drag tool
-function colourOverlay(val){
+function colourOverlay(rgb , val){
 
     imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
     data = imageData.data;
 
-    console.log('val: ' + val);
     for (var i = 0,len = data.length; i < len; i += 4) {
 
-        data[i] = val;
-        //data[i + 1] = data[i + 1] -val;
-        //data[i + 2] = data[i + 2] -val;
+        switch(rgb){
+            case 'R':
+                data[i] = val; break;
+            case 'G':
+                data[i+1] = val; break;
+            case 'B':
+                data[i+2] = val; break;
+        }
     }
     ctx.putImageData(imageData, 0, 0);
-    console.log('end loop');
-
 };
 
 
