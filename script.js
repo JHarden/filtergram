@@ -17,6 +17,7 @@ window.onload = function(event){
     function handleImage(e){
         var reader = new FileReader();
         reader.onload = function(event){
+
             var img = new Image();
             img.onload = function(){
                 canvas.width = img.width;
@@ -44,13 +45,11 @@ window.onload = function(event){
 
                     imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
                     data = imageData.data;
-
                     for (var i = 0; i < data.length; i += 4) {
                         var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
                         data[i] = avg; // red
                         data[i + 1] = avg; // green
                         data[i + 2] = avg; // blue
-
                     }
                     ctx.putImageData(imageData, 0, 0);
                 };
@@ -76,8 +75,10 @@ window.onload = function(event){
 
                 //run reset on image load
                 resetImageData();
+
             }
             img.src = event.target.result;
+
         }
         reader.readAsDataURL(e.target.files[0]);
     }
@@ -91,7 +92,7 @@ window.onload = function(event){
 
 };
 
-//using the drag tool
+//using the drag tool, for colour and alpha
 function colourOverlay(rgb , val){
 
     imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
@@ -113,7 +114,6 @@ function colourOverlay(rgb , val){
     ctx.putImageData(imageData, 0, 0);
 };
 
-
 function brightness (adjustment) {
 
     console.log('adjustment: ' + adjustment);
@@ -128,3 +128,19 @@ function brightness (adjustment) {
     }
     ctx.putImageData(imageData, 0, 0);
 };
+
+function saveToLocal(){
+
+    localStorage.setItem("imgCanvas",canvas.toDataURL());
+}
+
+function loadFromLocal(){
+
+    var img=new Image();
+    img.onload=function(){
+        ctx.drawImage(img,0,0);
+    }
+    img.src=localStorage.getItem("imgCanvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+}

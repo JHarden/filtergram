@@ -77,18 +77,19 @@ input[type="range"] {
   margin-top: 5rem;
   position: relative; }
 
-.download {
+.download, .save-local, .load-local {
   margin-top: 2rem;
   transition: background-color,0.35s,ease-in;
   background-color: #0092db;
-  width: 155px;
-  padding: 1rem;
-  font-size: 1rem; }
-  .download a {
+  width: auto;
+  padding: 1rem 1.5rem;
+  font-size: 1rem;
+  display: inline-block; }
+  .download a, .save-local a, .load-local a {
     color: #fff; }
-  .download:hover {
+  .download:hover, .save-local:hover, .load-local:hover {
     cursor: pointer;
     transition: background-color,0.35s,ease-in;
     background-color: #00a3f4; }
-    .download:hover a {
+    .download:hover a, .save-local:hover a, .load-local:hover a {
       color: #fff; }

@@ -84,13 +84,14 @@ input[type="range"]{
     position: relative;
 }
 
-.download {
+.download,.save-local,.load-local {
     margin-top: 2rem;
     transition: background-color,0.35s,ease-in;
     background-color: #0092db;
-    width: 155px;
-    padding: 1rem;
+    width: auto;
+    padding: 1rem 1.5rem;
     font-size: 1rem;
+    display: inline-block;
     a{
         color: #fff;
     }
