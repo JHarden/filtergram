@@ -57,9 +57,9 @@ window.onload = function(event){
                 var resetImageData = function(){
                     imageData = originalImageData;
                     ctx.putImageData(imageData, 0, 0);
-                    document.getElementById('redify').value = 0;
-                    document.getElementById('greenify').value = 0;
-                    document.getElementById('blueify').value = 0;
+                    document.getElementById('redify').value = 125;
+                    document.getElementById('greenify').value = 125;
+                    document.getElementById('blueify').value = 125;
                     document.getElementById('brightness').value = 1;
                     document.getElementById('alpha').value = 1;
                 };
@@ -98,6 +98,7 @@ function colourOverlay(rgb , val){
     imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
     data = imageData.data;
 
+    console.log('val: ' + val);
     for (var i = 0,len = data.length; i < len; i += 4) {
 
         switch(rgb){
@@ -115,13 +116,10 @@ function colourOverlay(rgb , val){
 };
 
 function brightness (adjustment) {
-
-    console.log('adjustment: ' + adjustment);
     imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
     data = imageData.data;
-
+    console.log('adjustment: ' + adjustment);
     for (var i= 0,len = data.length; i<len; i+=4) {
-
         data[i] += adjustment/5;
         data[i+1] += adjustment/5;
         data[i+2] += adjustment/5;
@@ -130,7 +128,6 @@ function brightness (adjustment) {
 };
 
 function saveToLocal(){
-
     localStorage.setItem("imgCanvas",canvas.toDataURL());
 }
 
