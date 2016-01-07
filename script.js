@@ -8,6 +8,8 @@ var ctx;
 var data;
 var imageData;
 var originalImageData;
+var isDisabled;
+
 
 window.onload = function(event){
 
@@ -16,7 +18,15 @@ window.onload = function(event){
     canvas = document.getElementById('img_canvas');
     ctx = canvas.getContext('2d');
 
+
+    function download() {
+        var dt = canvas.toDataURL();
+        this.href = dt; //this may not work in the future..
+    }
+    document.getElementById('download').addEventListener('click', download, false);
+
 };
+
 
 function handleImage(e){
     var reader = new FileReader();
@@ -24,9 +34,16 @@ function handleImage(e){
 
         var img = new Image();
         img.onload = function(){
-            canvas.width = img.width;
-            canvas.height = img.height;
-            ctx.drawImage(img,0,0);
+            if(img.width<=600){
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.drawImage(img,0,0);
+            }else{
+                canvas.width = 600;
+                canvas.height =img.height * (600/img.width);
+                ctx.drawImage(img,0,0,600,img.height * (600/img.width));
+            }
+
             img.style.display = 'none';
             imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
             originalImageData = ctx.getImageData(0,0,canvas.width, canvas.height);
@@ -38,6 +55,28 @@ function handleImage(e){
         img.src = event.target.result;
     };
     reader.readAsDataURL(e.target.files[0]);
+
+    if(isDisabled!=false){
+        var el = document.getElementsByTagName('input');
+        for(var i = 0;i<el.length;i++){
+            console.log(el[i]);
+            el[i].disabled=false;
+        }
+        document.getElementById('invertbtn').disabled=false;
+        document.getElementById('grayscalebtn').disabled=false;
+        document.getElementById('resetbtn').disabled=false;
+        isDisabled = false;
+    }
+
+    //show additional controls
+    var ctrl = document.getElementById('img_controls');
+    ctrl.className = ctrl.className + " active";
+
+    var canv = document.getElementById('canvas_container');
+    canv.className = canv.className + " active";
+    var filt = document.getElementById('filter_controls');
+    filt.className = filt.className + " active";
+
 }
 
 var invert = function() {
@@ -75,7 +114,10 @@ var resetImageData = function(){
     document.getElementById('blueify').value = 125;
     document.getElementById('brightness').value = 1;
     document.getElementById('alpha').value = 1;
-
+    var cv = document.getElementsByClassName('colour-val');
+    for(var i = 0; i < cv.length; i++){
+        cv[i].innerHTML = " ";
+    }
 };
 
 //using the drag tool, for colour and alpha
@@ -87,13 +129,21 @@ function colourOverlay(rgb , val){
     for (var i = 0,len = data.length; i < len; i += 4) {
         switch(rgb){
             case 'R':
-                data[i] = val; break;
+                data[i] = data[i]=val;
+                document.getElementById('r_val').innerHTML = val;
+                break;
             case 'G':
-                data[i+1] = val; break;
+                data[i+1] = val;
+                document.getElementById('g_val').innerHTML = val;
+                break;
             case 'B':
-                data[i+2] = val; break;
+                data[i+2] = val;
+                document.getElementById('b_val').innerHTML = val;
+                break;
             case 'A':
-                data[i+3] = val; break;
+                data[i+3] = val;
+                document.getElementById('a_val').innerHTML = val;
+                break;
         }
     }
     ctx.putImageData(imageData, 0, 0);
@@ -111,11 +161,6 @@ function brightness (adjustment) {
     ctx.putImageData(imageData, 0, 0);
 }
 
-function download() {
-    var dt = canvas.toDataURL();
-    this.href = dt; //this may not work in the future..
-}
-
 function saveToLocal(){
     localStorage.setItem("imgCanvas",canvas.toDataURL());
 }
@@ -124,8 +169,14 @@ function loadFromLocal(){
 
     var img=new Image();
     img.onload=function(){
+
+        if(img.width<=600){
         canvas.width = img.width;
         canvas.height = img.height;
+        }else{
+            canvas.width = 600;
+            img.width = 600;
+        }
         ctx.drawImage(img,0,0);
         img.style.display = 'none';
         imageData = ctx.getImageData(0,0,canvas.width, canvas.height);
@@ -136,4 +187,17 @@ function loadFromLocal(){
         resetImageData();
     };
     img.src=localStorage.getItem("imgCanvas");
+    if(isDisabled!=false){
+        var el = document.getElementsByTagName('input');
+        for(var i = 0;i<el.length;i++){
+            console.log(el[i]);
+            el[i].disabled=false;
+        }
+        document.getElementById('invertbtn').disabled=false;
+        document.getElementById('grayscalebtn').disabled=false;
+        document.getElementById('resetbtn').disabled=false;
+        isDisabled = false;
+    }
+    var ctrl = document.getElementById('img_controls');
+    ctrl.className = ctrl.className + " active";
 }

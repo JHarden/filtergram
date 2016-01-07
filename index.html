@@ -18,53 +18,57 @@
                 <input type="file" value="Upload" accept="image/*;capture=camera" id="img_capture" class="custom-file-input">
             </div>
         </div>
-        <div class="grid-50 content">
+
+        <div id="filter_controls" class="grid-50 content content-controls">
             <div class="filter-wrap">
                 <div class="filter">
                     <label for="brightness">Brightness</label>
-                    <input type="range" id="brightness" min="-100" max="100" value="0" onchange="brightness(this.value)">
+                    <input type="range" id="brightness" min="-100" max="100" value="0" onchange="brightness(this.value)" disabled="disabled">
+                    <label id="r_val" class="colour-val"></label>
                 </div>
                 <div class="filter">
                     <label for="redify">Red</label>
-                    <input type="range" id="redify" min="125" max="255" value="1" onchange="colourOverlay('R',this.value)">
+                    <input type="range" id="redify" min="125" max="255" value="1" onchange="colourOverlay('R',this.value)" disabled="disabled">
+                    <label id="g_val" class="colour-val"></label>
                 </div>
                 <div class="filter">
                     <label for="greenify">Green</label>
-                    <input type="range" id="greenify" min="125" max="255" value="1" onchange="colourOverlay('G',this.value)">
+                    <input type="range" id="greenify" min="125" max="255" value="1" onchange="colourOverlay('G',this.value)" disabled="disabled">
+                    <label id="b_val" class="colour-val"></label>
                 </div>
                 <div class="filter">
                     <label for="blueify">Blue</label>
-                    <input type="range" id="blueify" min="125" max="255" value="1" onchange="colourOverlay('B',this.value)">
+                    <input type="range" id="blueify" min="125" max="255" value="1" onchange="colourOverlay('B',this.value)" disabled="disabled">
+                    <label id="a_val" class="colour-val"></label>
                 </div>
                 <div class="filter">
                     <label for="alpha">Alpha</label>
-                    <input type="range" id="alpha" min="1" max="100" value="1" onchange="colourOverlay('A',this.value)">
+                    <input type="range" id="alpha" min="1" max="100" value="1" onchange="colourOverlay('A',this.value)" disabled="disabled">
                 </div>
-
 
                 <div class="filter">
                     <div class="grid-25">
-                    <button id="invertbtn" onclick="invert()">invert</button>
+                    <button id="invertbtn" onclick="invert()" disabled="disabled">invert</button>
                     </div>
                     <div class="grid-25">
-                        <button id="grayscalebtn" onclick="grayscale()">grayscale</button>
+                        <button id="grayscalebtn" onclick="grayscale()" disabled="disabled">grayscale</button>
                     </div>
                     <div class="grid-25">
-                        <button id="resetbtn" onclick="resetImageData()">reset</button>
+                        <button id="resetbtn" onclick="resetImageData()" disabled="disabled">reset</button>
                     </div>
 
                 </div>
             </div>
         </div>
 
-        <div class="grid-50 content">
+        <div id="canvas_container" class="grid-50 content canvas-container">
             <div class="canvas-wrap">
                 <canvas id="img_canvas" width="500" height="500">
                 </canvas>
             </div>
-            <div class="grid-100">
+            <div id="img_controls" class="grid-100 image-controls">
                 <div class="download">
-                    <a id="download" download="CanvasDemo.png" onclick="download()">Download as image</a>
+                    <a id="download" download="CanvasDemo.png">Download as image</a>
                 </div>
                 <div class="save-local">
                     <a id="save_local" onclick="saveToLocal()">Save To Local</a>

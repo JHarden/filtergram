@@ -80,7 +80,6 @@ input[type="range"]{
 }
 .filter-wrap {
     text-align: center;
-    margin-top: 5rem;
     position: relative;
 }
 
@@ -104,3 +103,54 @@ input[type="range"]{
         }
     }
 }
+
+.content-controls{
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity,1s,ease-in;
+    &.active{
+        position: relative;
+        visibility: visible;
+        opacity: 1;
+        transition: opacity,1.5s,ease-in-out;
+    }
+}
+
+.canvas-container{
+    width: 100%;
+    text-align: center;
+    &.active{
+        width: 50%;
+        text-align: left;
+    }
+}
+
+//color label values
+
+#r_val{
+    color: #FF0000;
+}
+#g_val{
+    color: #008000;
+}
+#b_val{
+    color: #0000FF;
+}
+#a_val{
+    color: #333;
+}
+.colour-val{
+    height: 20px;
+    font-weight: bold;
+}
+
+.image-controls{
+    opacity: 0;
+    transition: opacity,0.5s,ease-in;
+    &.active{
+        opacity: 1;
+        transition: opacity,0.5s,ease-in;
+    }
+}
+
