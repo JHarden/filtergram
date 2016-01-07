@@ -44,13 +44,13 @@
 
                 <div class="filter">
                     <div class="grid-25">
-                    <button id="invertbtn">invert</button>
+                    <button id="invertbtn" onclick="invert()">invert</button>
                     </div>
                     <div class="grid-25">
-                        <button id="grayscalebtn">grayscale</button>
+                        <button id="grayscalebtn" onclick="grayscale()">grayscale</button>
                     </div>
                     <div class="grid-25">
-                        <button id="resetbtn">reset</button>
+                        <button id="resetbtn" onclick="resetImageData()">reset</button>
                     </div>
 
                 </div>
@@ -64,7 +64,7 @@
             </div>
             <div class="grid-100">
                 <div class="download">
-                    <a id="download" download="CanvasDemo.png">Download as image</a>
+                    <a id="download" download="CanvasDemo.png" onclick="download()">Download as image</a>
                 </div>
                 <div class="save-local">
                     <a id="save_local" onclick="saveToLocal()">Save To Local</a>
