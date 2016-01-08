@@ -42,12 +42,15 @@ div.capture input{
 .custom-file-input{
     font-size: 0;
     max-width: 100px;
+
     transition: font-size,2s,ease-in-out;
+
     &.active{
         font-size: 1rem;
         max-width: 1000px;
         transition: font-size,2s,ease-in-out;
     }
+
     &:hover{
         cursor: pointer;
     }
@@ -242,4 +245,9 @@ input[type="range"]{
         display: block;
         z-index: 1;
     }
+}
+
+.canvas-paper{
+    border: 2px solid #ebebeb !important;
+    box-shadow: 8px 8px 16px 5px rgba(51, 51, 54, 0.3);
 }
