@@ -163,6 +163,16 @@ function brightness (adjustment) {
 
 function saveToLocal(){
     localStorage.setItem("imgCanvas",canvas.toDataURL());
+    var pu =document.getElementById('save_popup');
+    pu.className = pu.className  + " active";
+    var ms = document.getElementById("mask");
+    ms.className = ms.className + " active";
+
+    window.setTimeout(function(){
+        pu.className = "popup";
+        ms.className = "mask"
+    },1000);
+
 }
 
 function loadFromLocal(){

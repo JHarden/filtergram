@@ -76,22 +76,34 @@ input[type="range"] {
   text-align: center;
   position: relative; }
 
-.download, .save-local, .load-local {
+.download, .save-local, .load-local, .control-btn {
   margin-top: 2rem;
   transition: background-color,0.35s,ease-in;
   background-color: #0092db;
   width: auto;
   padding: 1rem 1.5rem;
   font-size: 1rem;
-  display: inline-block; }
-  .download a, .save-local a, .load-local a {
+  display: inline-block;
+  color: #fff; }
+  .download a, .save-local a, .load-local a, .control-btn a {
     color: #fff; }
-  .download:hover, .save-local:hover, .load-local:hover {
+  .download:hover, .save-local:hover, .load-local:hover, .control-btn:hover {
     cursor: pointer;
     transition: background-color,0.35s,ease-in;
     background-color: #00a3f4; }
-    .download:hover a, .save-local:hover a, .load-local:hover a {
+    .download:hover a, .save-local:hover a, .load-local:hover a, .control-btn:hover a {
       color: #fff; }
+
+.control-btn {
+  float: none;
+  width: 150px;
+  margin: 0 0.25rem; }
+  .control-btn.reset {
+    background-color: rgba(120, 120, 120, 0.89);
+    transition: background-color,0.35s,ease-in; }
+    .control-btn.reset:hover {
+      background-color: red;
+      transition: background-color,0.35s,ease-in; }
 
 .content-controls {
   position: absolute;
@@ -129,7 +141,49 @@ input[type="range"] {
 
 .image-controls {
   opacity: 0;
-  transition: opacity,0.5s,ease-in; }
+  transition: opacity,0.1s,ease-in; }
   .image-controls.active {
     opacity: 1;
+    transition: opacity,0.1s,ease-in; }
+
+.popup {
+  width: 200px;
+  border: 1px solid rgba(51, 51, 51, 0.2);
+  height: 50px;
+  display: block;
+  position: fixed;
+  clear: both;
+  -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
+  left: 50%;
+  margin-left: -100px;
+  top: 50%;
+  margin-top: -25px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity,0.5s,ease-in;
+  background-color: #fff;
+  z-index: 2; }
+  .popup.active {
+    visibility: visible;
+    opacity: 1;
+    z-index: 2;
     transition: opacity,0.5s,ease-in; }
+  .popup p {
+    text-align: center;
+    font-weight: bold;
+    color: #00a3f4; }
+
+.mask {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: #333;
+  opacity: 0.5;
+  top: 0;
+  z-index: 1; }
+  .mask.active {
+    display: block;
+    z-index: 1; }
