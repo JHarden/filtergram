@@ -36,6 +36,17 @@ div.capture input {
 .custom-file-input::-webkit-file-upload-button {
   visibility: hidden; }
 
+.custom-file-input {
+  font-size: 0;
+  max-width: 100px;
+  transition: font-size,2s,ease-in-out; }
+  .custom-file-input.active {
+    font-size: 1rem;
+    max-width: 1000px;
+    transition: font-size,2s,ease-in-out; }
+  .custom-file-input:hover {
+    cursor: pointer; }
+
 .custom-file-input::before {
   content: 'Upload';
   display: inline-block;
@@ -46,7 +57,10 @@ div.capture input {
   outline: none;
   white-space: nowrap;
   -webkit-user-select: none;
-  cursor: pointer; }
+  cursor: pointer;
+  font-size: 1rem;
+  top: -5px;
+  position: relative; }
 
 .custom-file-input:active::before {
   background-color: #00a3f4; }
@@ -65,7 +79,7 @@ div.content .canvas-wrap canvas {
 /*filters*/
 input[type="range"] {
   width: 40%;
-  margin: 2rem; }
+  margin: 1.5rem; }
 
 .filter label {
   color: #333;
@@ -81,12 +95,15 @@ input[type="range"] {
   transition: background-color,0.35s,ease-in;
   background-color: #0092db;
   width: auto;
-  padding: 1rem 1.5rem;
+  padding: 0;
   font-size: 1rem;
   display: inline-block;
   color: #fff; }
   .download a, .save-local a, .load-local a, .control-btn a {
-    color: #fff; }
+    color: #fff;
+    width: auto;
+    padding: 1rem;
+    display: block; }
   .download:hover, .save-local:hover, .load-local:hover, .control-btn:hover {
     cursor: pointer;
     transition: background-color,0.35s,ease-in;
@@ -97,13 +114,20 @@ input[type="range"] {
 .control-btn {
   float: none;
   width: 150px;
-  margin: 0 0.25rem; }
+  margin: 0 0.05rem;
+  padding: 0; }
   .control-btn.reset {
     background-color: rgba(120, 120, 120, 0.89);
     transition: background-color,0.35s,ease-in; }
     .control-btn.reset:hover {
       background-color: red;
       transition: background-color,0.35s,ease-in; }
+  .control-btn a {
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    display: block;
+    padding: 1rem 0; }
 
 .content-controls {
   position: absolute;
@@ -141,10 +165,10 @@ input[type="range"] {
 
 .image-controls {
   opacity: 0;
-  transition: opacity,0.1s,ease-in; }
+  transition: opacity,1s,ease-in; }
   .image-controls.active {
     opacity: 1;
-    transition: opacity,0.1s,ease-in; }
+    transition: opacity,1s,ease-in; }
 
 .popup {
   width: 200px;
@@ -153,9 +177,9 @@ input[type="range"] {
   display: block;
   position: fixed;
   clear: both;
-  -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
-  -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
-  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 5px 5px 0 rgba(0, 0, 0, 0.5);
   left: 50%;
   margin-left: -100px;
   top: 50%;
